@@ -101,49 +101,7 @@ After the AI verdict, you cast your own verdict and the result is exported to th
 
 DueDeck uses a **LangGraph sequential pipeline** with parallel execution inside key nodes:
 
-```
-Upload Documents
-      │
-      ▼
-┌─────────────────┐
-│  Ingestion Node │  → Extracts structured company profile (JSON)
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│   Gap Detector  │  → Identifies 5 critical due diligence gaps
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────────────────────────────────────────────────┐
-│               Evaluate Node  ★ 8 agents in parallel          │
-│  team │ market │ product │ traction │ biz_model │ ...        │
-│              asyncio.gather() — scores stream as ready       │
-└────────┬────────────────────────────────────────────────────┘
-         │
-         ▼
-┌─────────────────┐
-│  Synthesis Node │  → Investment memo summary & recommendation
-└────────┬────────┘
-         │
-         ▼
-┌──────────────────────────────────────────────┐
-│         Debate Node  ★ 2 agents in parallel   │
-│   Support Agent  ║  Opposition Agent          │
-│     (streaming)  ║    (streaming)             │
-└────────┬─────────────────────────────────────┘
-         │
-         ▼
-┌──────────────────────────────────────────────────────┐
-│           IC Node  ★ 3 committee members in parallel  │
-│   Sarah Chen  ║  Marcus Reid  ║  Priya Sharma         │
-│   (Managing)  ║   (General)   ║  (Principal)          │
-│              Majority vote → Final decision           │
-└────────┬─────────────────────────────────────────────┘
-         │
-         ▼
-    SSE stream → React frontend (real-time updates)
-```
+<img src="docs/workflow.svg" alt="DueDeck Agent Workflow Diagram" width="100%" />
 
 All events are delivered over **Server-Sent Events (SSE)** — the UI updates live as each agent completes.
 
