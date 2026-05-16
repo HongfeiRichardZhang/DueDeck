@@ -101,7 +101,7 @@ After the AI verdict, you cast your own verdict and the result is exported to th
 
 DueDeck uses a **LangGraph sequential pipeline** with parallel execution inside key nodes:
 
-<img src="docs/workflow.svg" alt="DueDeck Agent Workflow Diagram" width="100%" />
+<img src="docs/workflow.png" alt="DueDeck Agent Workflow Diagram" width="100%" />
 
 All events are delivered over **Server-Sent Events (SSE)** — the UI updates live as each agent completes.
 
