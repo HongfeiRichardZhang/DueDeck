@@ -110,7 +110,7 @@ function MemberCard({ member, voteData, isDeliberating, notStarted }) {
           }`} style={{ backgroundColor: member.bg }}>
             <img
               src={member.photo}
-              alt={member.name}
+              alt={member.role}
               className="w-full h-full object-cover"
             />
           </div>
@@ -126,8 +126,7 @@ function MemberCard({ member, voteData, isDeliberating, notStarted }) {
           )}
         </div>
         <div className="min-w-0 flex-1">
-          <p className="text-xs font-semibold text-gray-800 truncate">{member.name}</p>
-          <p className="text-[10px] text-violet-600 font-medium truncate">{member.role}</p>
+          <p className="text-xs font-semibold text-gray-800 truncate">{member.role}</p>
           <p className="text-[9px] text-gray-400 truncate">{member.focus}</p>
         </div>
       </div>

@@ -711,7 +711,7 @@ IC_MEMBERS = [
 ]
 
 IC_MEMBER_SYS = (
-    "You are {name}, {role} at an early-stage VC fund. "
+    "You are the {role} at an early-stage VC fund. "
     "Your investment focus: {focus}. "
     "Your style: {persona} "
     "You are one of three IC members independently reviewing a deal. "
@@ -733,7 +733,7 @@ Anti-Investment Summary:
 
 Critical data gaps: {gaps}
 
-You are {name}, {role}. Your lens: {focus}.
+You are the {role}. Your lens: {focus}.
 
 Return ONLY this JSON:
 {{
@@ -750,7 +750,7 @@ async def ic_member_agent(member: dict, profile: dict, scores: dict, overall_sco
     """One IC committee member casts an independent vote."""
     gap_summary = '; '.join(g.get('field', '') for g in gaps[:5]) or 'none flagged'
     sys_prompt = IC_MEMBER_SYS.format(
-        name=member['name'], role=member['role'],
+        role=member['role'],
         focus=member['focus'], persona=member['persona'],
     )
     user_prompt = IC_MEMBER_USER.format(
@@ -761,7 +761,7 @@ async def ic_member_agent(member: dict, profile: dict, scores: dict, overall_sco
         support_summary=(support_text or 'unavailable')[:1200],
         opposition_summary=(opposition_text or 'unavailable')[:1200],
         gaps=gap_summary,
-        name=member['name'], role=member['role'], focus=member['focus'],
+        role=member['role'], focus=member['focus'],
     )
     try:
         raw = await call_llm(sys_prompt, user_prompt, api_key)
