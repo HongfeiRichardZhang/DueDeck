@@ -818,10 +818,10 @@ def _aggregate_member_votes(member_votes: list, overall_score: int) -> dict:
     level = _VERDICT_LEVEL.get(winner, 2)
 
     # Build reasoning from member summaries
-    summaries = [f"{mv['name']} ({mv['role']}): {mv['reasoning']}" for mv in member_votes if mv['reasoning']]
+    summaries = [f"{mv['role']}: {mv['reasoning']}" for mv in member_votes if mv['reasoning']]
     reasoning = ' | '.join(summaries)
 
-    rationale_points = [f"{mv['name']} voted '{mv['vote']}' ({mv['confidence']} confidence)" for mv in member_votes]
+    rationale_points = [f"{mv['role']} voted '{mv['vote']}' ({mv['confidence']} confidence)" for mv in member_votes]
     red_flags       = [mv['key_concern'] for mv in member_votes if mv.get('key_concern')]
     questions       = [mv['question_for_founders'] for mv in member_votes if mv.get('question_for_founders')]
 
